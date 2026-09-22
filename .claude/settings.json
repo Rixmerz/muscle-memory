@@ -1,0 +1,6 @@
+{
+  "env": {
+    "VISE_TEST_CMD": "pnpm run test",
+    "VISE_LINT_CMD": "pnpm run lint"
+  }
+}
