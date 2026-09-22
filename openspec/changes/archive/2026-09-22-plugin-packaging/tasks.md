@@ -33,4 +33,4 @@
 
 - [x] 5.1 `pnpm build && pnpm test && pnpm lint && pnpm typecheck` all green
 - [x] 5.2 README: install instructions via the marketplace, and the sentence that installing records nothing until `/mm:enable`
-- [ ] 5.3 Install the plugin locally from the clone and confirm the five hooks appear and stay inert in a repo without `.mm/`
+- [x] 5.3 Install the plugin locally from the clone and confirm the five hooks appear and stay inert in a repo without `.mm/`
