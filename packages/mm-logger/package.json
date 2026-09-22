@@ -5,7 +5,17 @@
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "bin": { "mm-log": "./dist/bin.js" },
-  "scripts": { "build": "tsc --build" },
-  "dependencies": { "@muscle-memory/core": "workspace:*" }
+  "bin": {
+    "mm-log": "./dist/bin.js"
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "bench": "node dist/bench.js"
+  },
+  "dependencies": {
+    "@muscle-memory/core": "workspace:*"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
 }
