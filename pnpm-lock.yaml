@@ -38,6 +38,12 @@ importers:
 
   packages/mm-core: {}
 
+  packages/mm-learner:
+    dependencies:
+      '@muscle-memory/aggregator':
+        specifier: workspace:*
+        version: link:../mm-aggregator
+
   packages/mm-logger:
     dependencies:
       '@muscle-memory/core':

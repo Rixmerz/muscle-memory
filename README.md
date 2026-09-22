@@ -11,8 +11,10 @@ a slash command, or an MCP tool.
 
 M1: the event logger ships. M2: `mm candidates` reads the recorded events and
 prints the sequences that clear the score gate — it mines and ranks, but
-nothing is compiled or installed yet. The plugin only records, and only
-where you asked it to.
+nothing is compiled or installed yet. M3: `mm propose` turns a scored
+candidate into a markdown proposal — what the pattern is, why it scored the
+way it did, and what kind of automation it would become — without writing
+any automation. The plugin only records, and only where you asked it to.
 
 ## Install
 
@@ -64,6 +66,7 @@ know *that* you ran the formatter after editing a Java file, not what was in it.
 | `@muscle-memory/core` | event types, signature normalisation, scoring, gates |
 | `@muscle-memory/logger` | the hook binary: stdin JSON → append NDJSON, never blocks |
 | `@muscle-memory/aggregator` | `mm candidates`: reads `.mm/events/`, mines and scores patterns, prints — never writes |
+| `@muscle-memory/learner` | `mm propose`: turns a scored candidate into a markdown proposal, optionally persisted to `.mm/proposals/` |
 
 `plugin/` is the Claude Code plugin itself — manifest, hooks, commands, and a
 committed bundle of the logger at `plugin/bin/mm-log.mjs`. A plugin install

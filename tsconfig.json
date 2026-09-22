@@ -3,6 +3,7 @@
   "references": [
     { "path": "packages/mm-core/tsconfig.build.json" },
     { "path": "packages/mm-logger/tsconfig.build.json" },
-    { "path": "packages/mm-aggregator/tsconfig.build.json" }
+    { "path": "packages/mm-aggregator/tsconfig.build.json" },
+    { "path": "packages/mm-learner/tsconfig.build.json" }
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "name": "@muscle-memory/learner",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "mm-propose": "./dist/bin.js"
+  },
+  "scripts": {
+    "build": "tsc --build"
+  },
+  "dependencies": {
+    "@muscle-memory/aggregator": "workspace:*"
+  }
+}
