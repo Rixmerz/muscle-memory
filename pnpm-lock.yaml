@@ -36,6 +36,12 @@ importers:
         specifier: workspace:*
         version: link:../mm-core
 
+  packages/mm-builder:
+    dependencies:
+      '@muscle-memory/core':
+        specifier: workspace:*
+        version: link:../mm-core
+
   packages/mm-core: {}
 
   packages/mm-learner:
