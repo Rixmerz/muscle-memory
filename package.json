@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc --build tsconfig.json",
-    "bundle": "pnpm run build && esbuild packages/mm-logger/dist/bin.js --bundle --format=esm --platform=node --target=node22 --outfile=plugin/bin/mm-log.mjs",
+    "bundle": "pnpm run build && esbuild packages/mm-logger/dist/bin.js --bundle --format=esm --platform=node --target=node22 --outfile=plugin/bin/mm-log.mjs && esbuild packages/mm-aggregator/dist/nudge-bin.js --bundle --format=esm --platform=node --target=node22 --outfile=plugin/bin/mm-nudge.mjs",
     "test": "vitest run",
     "lint": "eslint .",
     "typecheck": "tsc --build tsconfig.json --force"

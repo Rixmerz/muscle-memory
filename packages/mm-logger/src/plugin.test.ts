@@ -134,7 +134,7 @@ describe("the plugin manifests", () => {
 
     expect(commands.length).toBeGreaterThan(0);
     for (const command of commands) {
-      expect(command).toContain("${CLAUDE_PLUGIN_ROOT}/bin/mm-log.mjs");
+      expect(command).toContain("${CLAUDE_PLUGIN_ROOT}/bin/");
       expect(command).not.toMatch(/(^|\s)\/(Users|home|opt|usr)\//);
     }
   });

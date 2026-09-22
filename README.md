@@ -19,8 +19,14 @@ any automation. M4: `mm build` compiles a `hook`-target proposal into a
 merges a built fragment into `.claude/settings.json` behind a guard, or removes
 it — the kill switch. M6: `mm run` orchestrates M2-M5 in one command — mine,
 propose, and, behind `--build`/`--install` flags, build and install — instead
-of chaining four CLIs by hand. The plugin only records, and only where you
-asked it to.
+of chaining four CLIs by hand. M7: a `SessionEnd` hook mines candidates and
+flags new ones in `.mm/review-pending.json`; `/mm:review` judges each through
+a read-only `learning-agent` subagent and prints the exact `mm run --build …
+--install` command for the ones it recommends — it never builds or installs
+anything itself. Approval is still the default: no hook, no agent, and no
+command in this plugin installs a fragment without a human running `mm-install`
+(or `mm run --install`) themselves. The plugin only records, and only where
+you asked it to.
 
 ## Install
 

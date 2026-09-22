@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.8.0 — 2026-09-22
+
+- `/mm:review`: mines candidates the same way `mm run` does and dispatches the
+  new `learning-agent` subagent (read-only) to judge each one for
+  determinism, safety, lifecycle placement, and value. Prints verdicts and,
+  for `recommend`, the exact `mm run --build <n> --command "<cmd>" --install`
+  invocation — never runs it.
+- `mm-nudge.mjs`: new `SessionEnd` hook binary. Mines candidates and, if the
+  id set changed since the last run, writes `.mm/review-pending.json`. Same
+  `.mm/` consent gate as the logger; installs nothing.
+- `/mm:status`: reports `.mm/review-pending.json` (count, mined-at) and, per
+  installed hook, its `.state.json` telemetry — `consecutiveFailures`,
+  `lastExitCode`, `disabledAt` — with an explicit note when a hook has
+  self-demoted.
+
 ## 0.7.0 — 2026-09-22
 
 - `mm run` (`@muscle-memory/cli`): orchestrates M2-M5 in one command — mine and

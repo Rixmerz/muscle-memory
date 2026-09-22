@@ -56,6 +56,11 @@
             "type": "command",
             "command": "node \"${CLAUDE_PLUGIN_ROOT}/bin/mm-log.mjs\" SessionEnd",
             "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/bin/mm-nudge.mjs\"",
+            "timeout": 5
           }
         ]
       }

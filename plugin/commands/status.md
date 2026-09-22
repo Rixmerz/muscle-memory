@@ -24,5 +24,14 @@ it yet.
 a problem, not a note: committed event data mixes several machines' behaviour
 into one table.
 
+**5. Review pending.** If `.mm/review-pending.json` exists, report its
+`count` and `minedAt`, and say `/mm:review` is how to see them judged.
+
+**6. Installed hooks.** For each `.mm/hooks/<id>.install.json`, pair it with
+the matching `<id>.state.json` if present and report `consecutiveFailures`,
+`lastExitCode`, and `disabledAt`. A non-null `disabledAt` means muscle-memory
+turned that hook off by itself after 3 consecutive failures — say this
+plainly, not just the raw field.
+
 Finish with one line on what would have to be true before anything is minable
 from what is there.
