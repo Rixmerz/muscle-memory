@@ -46,6 +46,28 @@ in one repository at a time:
 Stop recording by deleting the directory — `rm -rf .mm` revokes the consent and
 the data in one step.
 
+## Flow
+
+What is automatic and what needs a human, step by step:
+
+1. **`/mm:enable`** — once per repo. Creates `.mm/`, gitignores it. This is the
+   only consent step.
+2. **Recording** — automatic from here on. Every tool call appends a record to
+   `.mm/events/`. No action needed.
+3. **Mining** — automatic. A `SessionEnd` hook (`mm-nudge.mjs`) mines
+   candidates when a session ends. If the candidate set changed since last
+   time, it writes `.mm/review-pending.json`. Nothing is built or installed.
+4. **`/mm:review`** — you run this. It mines the same candidates and dispatches
+   the read-only `learning-agent` subagent to judge each one (determinism,
+   safety, lifecycle fit, value). For each `recommend` it prints the exact
+   `mm run --build <n> --command "<cmd>" --install` command — it never runs it.
+5. **You run that command** — the only step that writes to
+   `.claude/settings.json`. This is the approval gate: no hook, no agent, and
+   no command in this plugin installs a fragment on its own.
+6. **`/mm:status`** — anytime, to see what's recorded, what's pending review,
+   and any installed hook's health (`consecutiveFailures`, `disabledAt` if it
+   self-demoted after 3 failures).
+
 ### What a record contains
 
 One line per tool call, in `.mm/events/YYYY-MM-DD.ndjson`:
