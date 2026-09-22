@@ -2,7 +2,8 @@ import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["**/dist/**", "**/node_modules/**", "**/*.tsbuildinfo"] },
+  // plugin/bin holds build output, linted at its source in packages/mm-logger.
+  { ignores: ["**/dist/**", "**/node_modules/**", "**/*.tsbuildinfo", "plugin/bin/**"] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {

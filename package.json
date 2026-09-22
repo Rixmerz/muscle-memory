@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "tsc --build tsconfig.json",
+    "bundle": "pnpm run build && esbuild packages/mm-logger/dist/bin.js --bundle --format=esm --platform=node --target=node22 --outfile=plugin/bin/mm-log.mjs",
     "test": "vitest run",
     "lint": "eslint .",
     "typecheck": "tsc --build tsconfig.json --force"
@@ -16,6 +17,7 @@
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "@types/node": "^22.10.0",
+    "esbuild": "^0.28.2",
     "eslint": "^9.36.0",
     "typescript": "^5.7.0",
     "typescript-eslint": "^8.18.0",
