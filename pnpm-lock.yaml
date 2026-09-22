@@ -30,6 +30,12 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)
 
+  packages/mm-aggregator:
+    dependencies:
+      '@muscle-memory/core':
+        specifier: workspace:*
+        version: link:../mm-core
+
   packages/mm-core: {}
 
   packages/mm-logger:
