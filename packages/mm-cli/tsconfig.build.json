@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.test.ts"],
+  "references": [
+    { "path": "../mm-aggregator/tsconfig.build.json" },
+    { "path": "../mm-builder/tsconfig.build.json" },
+    { "path": "../mm-core/tsconfig.build.json" },
+    { "path": "../mm-installer/tsconfig.build.json" },
+    { "path": "../mm-learner/tsconfig.build.json" }
+  ]
+}

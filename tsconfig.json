@@ -6,6 +6,7 @@
     { "path": "packages/mm-aggregator/tsconfig.build.json" },
     { "path": "packages/mm-learner/tsconfig.build.json" },
     { "path": "packages/mm-builder/tsconfig.build.json" },
-    { "path": "packages/mm-installer/tsconfig.build.json" }
+    { "path": "packages/mm-installer/tsconfig.build.json" },
+    { "path": "packages/mm-cli/tsconfig.build.json" }
   ]
 }

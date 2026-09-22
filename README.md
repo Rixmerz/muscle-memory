@@ -14,7 +14,13 @@ prints the sequences that clear the score gate — it mines and ranks, but
 nothing is compiled or installed yet. M3: `mm propose` turns a scored
 candidate into a markdown proposal — what the pattern is, why it scored the
 way it did, and what kind of automation it would become — without writing
-any automation. The plugin only records, and only where you asked it to.
+any automation. M4: `mm build` compiles a `hook`-target proposal into a
+`PostToolUse` fragment, never touching `.claude/settings.json`. M5: `mm-install`
+merges a built fragment into `.claude/settings.json` behind a guard, or removes
+it — the kill switch. M6: `mm run` orchestrates M2-M5 in one command — mine,
+propose, and, behind `--build`/`--install` flags, build and install — instead
+of chaining four CLIs by hand. The plugin only records, and only where you
+asked it to.
 
 ## Install
 
@@ -67,6 +73,9 @@ know *that* you ran the formatter after editing a Java file, not what was in it.
 | `@muscle-memory/logger` | the hook binary: stdin JSON → append NDJSON, never blocks |
 | `@muscle-memory/aggregator` | `mm candidates`: reads `.mm/events/`, mines and scores patterns, prints — never writes |
 | `@muscle-memory/learner` | `mm propose`: turns a scored candidate into a markdown proposal, optionally persisted to `.mm/proposals/` |
+| `@muscle-memory/builder` | `mm build`: compiles a `hook`-target proposal into a `PostToolUse` fragment, optionally persisted to `.mm/hooks/` — never writes `.claude/settings.json` |
+| `@muscle-memory/installer` | `mm-install`: merges a built fragment into `.claude/settings.json` behind a guard, or removes it (`install` / `uninstall`) |
+| `@muscle-memory/cli` | `mm run`: orchestrates the four packages above in one command — mine and print by default, `--build <n> --command` to compile, `--install` to install |
 
 `plugin/` is the Claude Code plugin itself — manifest, hooks, commands, and a
 committed bundle of the logger at `plugin/bin/mm-log.mjs`. A plugin install

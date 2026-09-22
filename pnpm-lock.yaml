@@ -42,6 +42,24 @@ importers:
         specifier: workspace:*
         version: link:../mm-core
 
+  packages/mm-cli:
+    dependencies:
+      '@muscle-memory/aggregator':
+        specifier: workspace:*
+        version: link:../mm-aggregator
+      '@muscle-memory/builder':
+        specifier: workspace:*
+        version: link:../mm-builder
+      '@muscle-memory/core':
+        specifier: workspace:*
+        version: link:../mm-core
+      '@muscle-memory/installer':
+        specifier: workspace:*
+        version: link:../mm-installer
+      '@muscle-memory/learner':
+        specifier: workspace:*
+        version: link:../mm-learner
+
   packages/mm-core: {}
 
   packages/mm-installer:
