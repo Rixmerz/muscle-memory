@@ -1,6 +1,6 @@
 {
   "name": "muscle-memory",
-  "version": "0.0.0",
+  "version": "0.7.0",
   "description": "Turns repeated agent behaviour into hooks: observes tool calls, mines the sequences that repeat, and compiles the ones that clear the gates into automation you approved.",
   "author": {
     "name": "Juan Pablo Diaz",
