@@ -1,7 +1,8 @@
 # pattern-aggregation Specification
 
 ## Purpose
-TBD - created by archiving change pattern-aggregator. Update Purpose after archive.
+Mine the recorded events for repeated tool-call sequences and score them, so only patterns that clear boolean gates are ever shown as automation candidates.
+
 ## Requirements
 ### Requirement: Session sequences are mined for contiguous signature n-grams
 The aggregator SHALL read every `.mm/events/*.ndjson` day file under a given

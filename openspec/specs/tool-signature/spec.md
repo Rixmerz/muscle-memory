@@ -1,7 +1,8 @@
 # tool-signature Specification
 
 ## Purpose
-TBD - created by archiving change event-logger. Update Purpose after archive.
+Reduce every tool call to a stable, low-cardinality signature plus a one-way argument hash, so patterns can be mined without storing commands, paths or content.
+
 ## Requirements
 ### Requirement: A tool invocation SHALL reduce to a stable low-cardinality signature
 

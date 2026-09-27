@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.9.0 — 2026-09-26
+
+- `mm-classifier` (`@muscle-memory/classifier`, bundled as
+  `plugin/bin/mm-classifier.mjs`): classification flows backed by a local
+  [Laya](https://github.com/NandhaKishorM/laya) server. `new` validates a
+  definition and writes it only to an explicit `--store mm`
+  (`.mm/classifiers/`) or `--out <path>`; `run` turns a JSON input into one
+  decision; `test` checks the definition's own examples; `hook` adapts the
+  decision to Claude Code hook JSON and fails open; `hook-fragment` prints
+  the wiring without touching `settings.json`; `setup` installs Laya into
+  a per-user virtualenv (CPU torch) and downloads its checkpoints;
+  `server start|stop|status`
+  runs `laya-serve` on 127.0.0.1, on CPU by default.
+- Classifier `rules` (ordered regexes that decide without calling Laya) and
+  `decide.next` (chain classifiers; names resolve next to the definition).
+- Lint warnings on `new`/`test` for Laya's documented pitfalls; `test`
+  splits accuracy into rules and Laya; `choice` accepts null glosses and
+  label lists, `noul` accepts no criteria and a `labels` override.
+- `classifier` skill: environment check, Laya install, writing a definition,
+  asking where to store it, testing, and connecting it to a hook or any
+  other flow.
+- `plugin.json` version now matches the CHANGELOG (it still said 0.7.0).
+- Living specs: placeholder `Purpose` sections replaced with real ones.
+
 ## 0.8.0 — 2026-09-22
 
 - `/mm:review`: mines candidates the same way `mm run` does and dispatches the

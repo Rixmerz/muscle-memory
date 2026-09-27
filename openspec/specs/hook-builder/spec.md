@@ -1,7 +1,8 @@
 # hook-builder Specification
 
 ## Purpose
-TBD - created by archiving change hook-builder. Update Purpose after archive.
+Compile a `hook`-target proposal plus a human-supplied command into a `PostToolUse` settings fragment, without ever touching `.claude/settings.json`.
+
 ## Requirements
 ### Requirement: mm build parses a proposal file
 `mm build <proposal-file>` SHALL extract the mined step signatures and the

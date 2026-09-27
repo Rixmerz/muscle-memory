@@ -23,7 +23,10 @@ of chaining four CLIs by hand. M7: a `SessionEnd` hook mines candidates and
 flags new ones in `.mm/review-pending.json`; `/mm:review` judges each through
 a read-only `learning-agent` subagent and prints the exact `mm run --build …
 --install` command for the ones it recommends — it never builds or installs
-anything itself. Approval is still the default: no hook, no agent, and no
+anything itself. M8: `mm-classifier` and the `classifier` skill create
+classification flows — small typed decisions answered by a local
+[Laya](https://github.com/NandhaKishorM/laya) model — that a hook or any
+other flow can call. Approval is still the default: no hook, no agent, and no
 command in this plugin installs a fragment without a human running `mm-install`
 (or `mm run --install`) themselves. The plugin only records, and only where
 you asked it to.
@@ -82,6 +85,48 @@ of thing it acted on. `arg` is a hash. Neither the arguments, the file contents,
 the command output, nor your prompts are written anywhere: the miner needs to
 know *that* you ran the formatter after editing a Java file, not what was in it.
 
+## Classification flows
+
+Some decisions an agent makes are a small closed question: is this command
+destructive, is this prompt a bug report or a question, does this need a
+human. `mm-classifier` turns such a question into one JSON file — Laya's own
+`choice` / `score` / `noul` questions plus a rule mapping the answer to an
+outcome — and answers it in about a second on CPU, without LLM reasoning.
+
+```sh
+node plugin/bin/mm-classifier.mjs setup                 # venv + CPU torch + laya[serve] + checkpoints
+node plugin/bin/mm-classifier.mjs server start          # local laya-serve, 127.0.0.1, CPU
+node plugin/bin/mm-classifier.mjs new triage --store mm < triage.json   # or --out classifiers/
+node plugin/bin/mm-classifier.mjs test triage           # the definition's own examples
+echo '{"prompt":"the build is broken"}' | node plugin/bin/mm-classifier.mjs run triage
+```
+
+- **Where it is stored is always asked.** `new` refuses without `--store mm`
+  (`.mm/classifiers/`, local and gitignored; needs `/mm:enable` first) or
+  `--out <path>` (anywhere, e.g. a committed directory).
+- **Rules first, Laya for the rest.** Ordered regex `rules` on any field
+  decide without a model call; `decide.next` chains classifiers (sender →
+  bank → kind of notice). On a real 300-email inbox, rules decided 286.
+- **Any flow can call it.** `run` prints one decision JSON (`outcome`,
+  `reason`, `label`, `confidence`, every answer); branch on `outcome`.
+- **Hooks are one consumer, wired by hand.** `hook` speaks Claude Code hook
+  JSON (`allow`/`ask`/`deny`/`block` outcomes) and fails open;
+  `hook-fragment` prints the `settings.json` entry and writes nothing.
+- **Laya reads text; it does not know the world.** Its own vendor ships it
+  as a base to specialise, not a zero-shot engine. `new` and `test` warn
+  about its documented pitfalls, and `test` reports rule and Laya accuracy
+  separately. The skill's `references/laya.md` has the details.
+- **Laya is a Python dependency** installed per user, not per repo, by
+  `setup`: `~/.local/share/muscle-memory/laya` (`MM_LAYA_PYTHON` overrides),
+  ~1 GB plus ~800 MB per checkpoint. The `classifier` skill walks the agent
+  through installing it, writing a
+  definition, asking where to store it, testing, and wiring it.
+
+Measured on a Ryzen 7 4800H, CPU only: ~0.6–0.9 s per warm decision, ~2 GB
+resident, 5/5 on a natural-language triage flow (English and Spanish), and no
+better than 3/4 on bare shell commands — Laya is a decision signal for text,
+not a parser.
+
 ## Principles
 
 - **Observe first, install last.** The logger and the aggregator ship before the
@@ -104,12 +149,15 @@ know *that* you ran the formatter after editing a Java file, not what was in it.
 | `@muscle-memory/builder` | `mm build`: compiles a `hook`-target proposal into a `PostToolUse` fragment, optionally persisted to `.mm/hooks/` — never writes `.claude/settings.json` |
 | `@muscle-memory/installer` | `mm-install`: merges a built fragment into `.claude/settings.json` behind a guard, or removes it (`install` / `uninstall`) |
 | `@muscle-memory/cli` | `mm run`: orchestrates the four packages above in one command — mine and print by default, `--build <n> --command` to compile, `--install` to install |
+| `@muscle-memory/classifier` | `mm-classifier`: create, test and run Laya-backed classification flows, adapt them to hooks, manage the local Laya server |
 
-`plugin/` is the Claude Code plugin itself — manifest, hooks, commands, and a
-committed bundle of the logger at `plugin/bin/mm-log.mjs`. A plugin install
-copies files and runs no package manager, so that bundle is the delivery
-mechanism; `pnpm bundle` regenerates it and the test suite fails if the
-committed copy and a fresh build differ.
+`plugin/` is the Claude Code plugin itself — manifest, hooks, commands,
+skills, and committed bundles in `plugin/bin/` (`mm-log.mjs`, `mm-nudge.mjs`,
+`mm-classifier.mjs`). A plugin install copies files and runs no package
+manager, so those bundles are the delivery mechanism; `pnpm bundle`
+regenerates them, and the test suite fails if the committed logger or
+classifier bundle differs from a fresh build (`mm-nudge.mjs` has no such
+check yet).
 
 ## Development
 

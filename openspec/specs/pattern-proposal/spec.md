@@ -1,7 +1,8 @@
 # pattern-proposal Specification
 
 ## Purpose
-TBD - created by archiving change learning-proposer. Update Purpose after archive.
+Turn a scored candidate into a readable markdown proposal that says what the pattern is, why it scored as it did, and what automation it would become.
+
 ## Requirements
 ### Requirement: Proposal classification
 The system SHALL classify a scored candidate's suggested automation target as

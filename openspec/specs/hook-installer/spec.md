@@ -1,7 +1,8 @@
 # hook-installer Specification
 
 ## Purpose
-TBD - created by archiving change hook-installer. Update Purpose after archive.
+Merge a built hook fragment into `.claude/settings.json` behind a guard that self-demotes on repeated failure, and remove it again: the kill switch.
+
 ## Requirements
 ### Requirement: mm install merges a hook fragment into settings.json
 `mm install <fragment-file>` SHALL parse a `HookFragment` JSON and append a

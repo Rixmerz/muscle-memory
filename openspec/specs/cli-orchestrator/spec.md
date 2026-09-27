@@ -1,7 +1,8 @@
 # cli-orchestrator Specification
 
 ## Purpose
-TBD - created by archiving change cli-orchestrator. Update Purpose after archive.
+Run the mine, propose, build and install stages as one `mm run` command, so a human does not chain four CLIs by hand to go from recorded events to an installed hook.
+
 ## Requirements
 ### Requirement: `mm run` prints ranked proposals with no flags
 Running `mm run` with no flags SHALL mine and score candidates from the

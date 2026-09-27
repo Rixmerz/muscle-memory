@@ -1,7 +1,8 @@
 # event-logging Specification
 
 ## Purpose
-TBD - created by archiving change event-logger. Update Purpose after archive.
+Record one small, content-free line per Claude Code hook invocation into `.mm/events/`, fast enough to sit on every tool call and never able to fail it.
+
 ## Requirements
 ### Requirement: The logger SHALL append one record per hook invocation
 

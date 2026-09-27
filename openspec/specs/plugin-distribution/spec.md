@@ -1,7 +1,8 @@
 # plugin-distribution Specification
 
 ## Purpose
-TBD - created by archiving change plugin-packaging. Update Purpose after archive.
+Ship muscle-memory as a Claude Code plugin whose hooks are installed everywhere but record nothing until a repository opts in by creating `.mm/`.
+
 ## Requirements
 ### Requirement: The repository SHALL ship a Claude Code plugin
 
